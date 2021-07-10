@@ -3,6 +3,13 @@ import ReactDOM from 'react-dom'
 import { App } from './App'
 import { Auth0Provider } from "@auth0/auth0-react"
 import { selectPreferredLanguage } from 'typed-intl'
+import { defaultLocale, LocaleContext } from './framework/locale-context'
+import * as dotenv from 'dotenv'
+import 'antd/dist/antd.css';
+
+dotenv.config()
+
+selectPreferredLanguage(['fr', 'en'])
 
 ReactDOM.render(
   <Auth0Provider

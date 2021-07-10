@@ -2,19 +2,37 @@ import React from "react"
 import { useAuth0 } from "@auth0/auth0-react"
 import { translate } from "typed-intl"
 import { useTranslator } from "../hooks/use-translator"
+import { Button, Space } from "antd"
+import { stylesheet } from 'typestyle'
 
 const LogoutMsg = translate({
-    logout: 'Se déconnecter'
+    logout: 'Se déconnecter',
+    disconnect: 'Tu veux te connecter avec un autre user ?'
 }).supporting('en', {
-    logout: 'Log out'
+    logout: 'Logout',
+    disconnect: 'You want to login with an other user ?'
+})
+
+const css = stylesheet({
+    button: {
+        width: '8rem'
+    },
+    disconnect: {
+        fontSize: '1.3rem',
+        marginTop: '2rem',
+        fontWeight: 300
+    }
 })
 
 export const LogoutButton: React.FC = () => {
     const { logout } = useAuth0()
     const msg = useTranslator(LogoutMsg)
     return (
-        <button onClick={() => logout({ returnTo: 'http://localhost:8000' })}>
+        <Space align='end'>
+            <div className={css.disconnect}>{msg.disconnect}</div>
+        <Button onClick={() => logout({ returnTo: 'http://localhost:8000' })} className={css.button}>
             {msg.logout}
-        </button>
+        </Button>
+        </Space>
     )
 }

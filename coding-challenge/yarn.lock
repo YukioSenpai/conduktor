@@ -4009,6 +4009,11 @@ cssstyle@^2.2.0:
   dependencies:
     cssom "~0.3.6"
 
+csstype@2.6.9:
+  version "2.6.9"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.9.tgz#05141d0cd557a56b8891394c1911c40c8a98d098"
+  integrity sha512-xz39Sb4+OaTsULgUERcCk+TJj8ylkL4aSVDQiX/ksxbELSqwkgt4d4RD7fovIdgJGSuNYqwZEiVjYY5l0ask+Q==
+
 csstype@^3.0.2:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.8.tgz#d2266a792729fb227cd216fb572f43728e1ad340"
@@ -4361,6 +4366,11 @@ dotenv@8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
+
+dotenv@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
+  integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
 duplexer@^0.1.1:
   version "0.1.2"
@@ -5271,6 +5281,11 @@ fragment-cache@^0.2.1:
   integrity sha1-QpD60n8T6Jvn8zeZxrxaCr//DRk=
   dependencies:
     map-cache "^0.2.2"
+
+free-style@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/free-style/-/free-style-3.1.0.tgz#4e2996029534e6b1731611d843437b9e2f473f08"
+  integrity sha512-vJujYSIyT30iDoaoeigNAxX4yB1RUrh+N2ZMhIElMr3BvCuGXOw7XNJMEEJkDUeamK2Rnb/IKFGKRKlTWIGRWA==
 
 fresh@0.5.2:
   version "0.5.2"
@@ -6827,6 +6842,11 @@ jest@26.6.0:
     "@jest/core" "^26.6.0"
     import-local "^3.0.2"
     jest-cli "^26.6.0"
+
+js-joda@^1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/js-joda/-/js-joda-1.11.0.tgz#e0e424b049cf7a9db3ed7729a6ca1f7d96b2486e"
+  integrity sha512-/HJpRhwP2fPyuSsCaZuoVJuaSIt8tUXykV4wOMRXrFk7RP9h9VWaFdS9YHKdMepxb/3TdXpL6IhfC9L0sqYVBw==
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
@@ -11293,6 +11313,14 @@ typescript@4.3.5:
   version "4.3.5"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.3.5.tgz#4d1c37cc16e893973c45a06886b7113234f119f4"
   integrity sha512-DqQgihaQ9cUrskJo9kIyW/+g0Vxsk8cDtZ52a3NGh0YNTfpUSArXSohyUGnvbPazEPLu398C0UxmKSOrPumUzA==
+
+typestyle@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/typestyle/-/typestyle-2.1.0.tgz#7c5cc567de72cd8bfb686813150b92791aaa7636"
+  integrity sha512-6uCYPdG4xWLeEcl9O0GtNFnNGhami+irKiLsXSuvWHC/aTS7wdj49WeikWAKN+xHN3b1hm+9v0svwwgSBhCsNA==
+  dependencies:
+    csstype "2.6.9"
+    free-style "3.1.0"
 
 unfetch@^4.2.0:
   version "4.2.0"

@@ -1,6 +1,7 @@
 import { Button } from 'antd'
 import axios from 'axios'
 import React, { useState } from 'react'
+import { useSetLocale } from '../framework/locale-context'
 
 interface Cluster {
     id: string
@@ -14,6 +15,7 @@ interface Topic {
 export const Test: React.FC = () => {
     const [clusters, setClusters] = useState<Cluster[]>()
     const [topics, setTopics] = useState<Topic[]>()
+    const setLocale = useSetLocale()
     return (
         <div>
             <Button onClick={() => axios.post('https://virtserver.swaggerhub.com/YukioSenpai/challenge/1.0.0/clusters', 'cluster1')}>post cluster</Button>
@@ -30,6 +32,7 @@ export const Test: React.FC = () => {
                 console.log(response)
             })}>get topics</Button>
             {topics && <div>{`cluster : ${topics.map(topic => topic.name)}`}</div>}
+            <Button onClick={() => setLocale()}>yoooo</Button>
         </div>
     )
 }
