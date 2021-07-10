@@ -1,0 +1,10 @@
+{
+    "files": [],
+    "include": [],
+    "compilerOptions": {},
+    "references": [
+        {
+            "path": "./coding-challenge"
+        }
+    ]
+}
