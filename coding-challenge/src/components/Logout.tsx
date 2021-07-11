@@ -25,14 +25,23 @@ const css = stylesheet({
 })
 
 export const LogoutButton: React.FC = () => {
-    const { logout } = useAuth0()
+    const { logout, isAuthenticated } = useAuth0()
     const msg = useTranslator(LogoutMsg)
+
+    const clickOnLogout = () => {
+        localStorage.setItem('token', '')
+        logout({ returnTo: 'http://localhost:8000' })
+    }
     return (
         <Space align='end'>
-            <div className={css.disconnect}>{msg.disconnect}</div>
-        <Button onClick={() => logout({ returnTo: 'http://localhost:8000' })} className={css.button}>
-            {msg.logout}
-        </Button>
+            {isAuthenticated && 
+                <>
+                    <div className={css.disconnect}>{msg.disconnect}</div>
+                    <Button onClick={clickOnLogout} className={css.button}>
+                        {msg.logout}
+                    </Button>
+                </>
+            }
         </Space>
     )
 }

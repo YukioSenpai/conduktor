@@ -1,6 +1,5 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useAuth0 } from "@auth0/auth0-react"
-import { Button } from "antd"
 import { translate } from "typed-intl"
 import { useTranslator } from "../hooks/use-translator"
 import { stylesheet } from "typestyle"
@@ -31,12 +30,27 @@ const css = stylesheet({
     }
 })
 export const LoginButton: React.FC = () => {
-    const { loginWithRedirect } = useAuth0()
+    const { loginWithRedirect, isAuthenticated } = useAuth0()
     const msg = useTranslator(LoginMsg)
+    const query = window.location.search
+    const token = query.split('code=').pop()
+
+    const login = () => {
+        loginWithRedirect()
+    }
+
+    useEffect(() => {
+        token && token !== '' && localStorage.setItem('token', token)
+    }, [token])
+
     return (
         <div className={css.container}>
-            <div className={css.greetings}>{msg.hello}</div>
-            <PrimaryButton className={css.button} size='large' onClick={() => loginWithRedirect()}>{msg.login}</PrimaryButton>
+            {!isAuthenticated && 
+                <>
+                    <div className={css.greetings}>{msg.hello}</div>
+                    <PrimaryButton className={css.button} size='large' onClick={login}>{msg.login}</PrimaryButton>
+                </>
+            }
         </div>
     )
 }
