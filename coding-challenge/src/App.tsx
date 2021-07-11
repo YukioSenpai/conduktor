@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
-import Home from './components/Home'
+import { Home } from './components/Home'
 import { Layout } from './components/Layout'
 import { LoginButton } from './components/Login'
 
