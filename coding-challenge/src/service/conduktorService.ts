@@ -1,13 +1,11 @@
 import axios from "axios";
 import {nanoid} from "nanoid"
+import { Cluster } from "../business/cluster";
+import { ConduktorActions } from "../store/conduktor.actions"
+import { store } from "../store/store"
 
 interface CreateCluster {
     name: string
-}
-
-export interface Cluster {
-    name: string
-    id: string
 }
 
 export interface Topic {
@@ -33,7 +31,7 @@ const buildMockConduktorService = () : ConduktorService => {
     const topicState: {[clusterId : string]: Topic[]} = {}
     return ({
         createCluster: (cluster) => {
-            clusterState.push({id: nanoid(), name: cluster.name})
+            store.dispatch(ConduktorActions.build({clusters: [{id: nanoid(), name: cluster.name}], type: 'UpdateClusters'}))
             return Promise.resolve()
         },
         listCluster: () => Promise.resolve(clusterState),

@@ -1,8 +1,8 @@
-import { Cluster } from 'cluster'
 import { Lens } from 'monocle-ts'
+import { Cluster } from '../business/cluster'
 
 export interface ConduktorState {
-    clusterState: Cluster[]
+    clusterState: ReadonlyArray<Cluster>
 }
 
 export const clusterLens = Lens.fromProp<ConduktorState>()('clusterState')

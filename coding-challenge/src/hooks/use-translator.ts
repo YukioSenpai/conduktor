@@ -1,13 +1,16 @@
 import React, { useContext } from 'react'
 import { languageTag, MessageProvider } from 'typed-intl'
 import { Locale } from '../models/locale'
-import { LocaleFakeContext } from '../framework/locale-context'
+import { LocaleContext, ContextLocale} from '../framework/locale-context'
+import {Lens} from 'monocle-ts'
 
-const translator = <L>(C: React.Context<L>, unwrap: (locale: L) => string) => <A>(
-    a: MessageProvider<A>
-): A => {
-    const locale = useContext(C)
-    return a.messagesFor(languageTag(unwrap(locale)))
+export const translator = <A,B>(lens: Lens<A,B>) => (C: React.Context<A>) => (unwrap: (locale: B) => string) => <C>(
+    a: MessageProvider<C>
+): C => {
+    const c = useContext(C)
+    return a.messagesFor(languageTag(unwrap(lens.get(c))))
 }
 
-export const useTranslator = translator(LocaleFakeContext, Locale.unwrap)
+const lens = Lens.fromProp<ContextLocale>()('value')
+
+export const useTranslator = translator(lens)(LocaleContext)(Locale.unwrap)

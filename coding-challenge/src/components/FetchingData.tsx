@@ -2,10 +2,13 @@ import { Button, Collapse, Input, Space } from 'antd'
 import React, { useRef, useState } from 'react'
 import { stylesheet } from 'typestyle'
 import { CaretRightOutlined } from '@ant-design/icons'
-import { Cluster, mockConduktorService, Topic } from '../service/conduktorService'
+import { mockConduktorService, Topic } from '../service/conduktorService'
 import { translate } from 'typed-intl'
 import { useTranslator } from '../hooks/use-translator'
 import * as A from 'fp-ts/Array'
+import { useSelector } from 'react-redux'
+import { clusterLens } from '../store/conduktor.state'
+import { Cluster } from '../business/cluster'
 
 const { Panel } = Collapse
 
@@ -40,6 +43,8 @@ export const FetchingData: React.FC = () => {
     const msg = useTranslator(FetchMsg)
     const collapseRef = useRef<HTMLDivElement>(null)
 
+    const clustersssss = useSelector(clusterLens.get)
+    console.log(clustersssss)
     // const [data, setData] = React.useState([] as any)
 
     const [clusters, setClusters] = useState<Cluster[]>()
