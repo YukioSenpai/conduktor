@@ -1,6 +1,6 @@
 # conduktor
 
-conduktor-coding-challenge
+https://github.com/conduktor/conduktor-coding-challenge/tree/main/frontend-developers
 
 To run the app, follow those step:
 
