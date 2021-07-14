@@ -1,43 +1,40 @@
 import { createBrowserHistory } from 'history'
-import { applyMiddleware, combineReducers, createStore } from 'redux'
- import { createStateSyncMiddleware, initStateWithPrevTab } from 'redux-state-sync';
+import { Lens } from 'monocle-ts'
+import { AnyAction, applyMiddleware, combineReducers, createStore, Store } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import logger from 'redux-logger'
 import { createEpicMiddleware } from 'redux-observable'
+import { createStateSyncMiddleware, initStateWithPrevTab } from 'redux-state-sync'
 import { ConduktorActions } from './conduktor.actions'
 import { conduktorReducer } from './conduktor.reducer'
 import { ConduktorState } from './conduktor.state'
-import { Lens } from 'monocle-ts'
-import {Store, AnyAction} from "redux"
 
 export type Actions = ConduktorActions
 
 export interface State {
-    conduktor: ConduktorState
-
+  conduktor: ConduktorState
 }
 
 export const epicMiddleware = createEpicMiddleware<Actions, Actions, State>()
 
-const tabSyncMiddleware = createStateSyncMiddleware({
-})
+const tabSyncMiddleware = createStateSyncMiddleware({})
 
-const middlewares = process.env.ENV === 'production' ? [epicMiddleware, tabSyncMiddleware] : [epicMiddleware, tabSyncMiddleware, logger]
+const middlewares =
+  process.env.ENV === 'production'
+    ? [epicMiddleware, tabSyncMiddleware]
+    : [epicMiddleware, tabSyncMiddleware, logger]
 
 export const history = createBrowserHistory()
 
 const rootReducers = combineReducers<State>({
-    conduktor: conduktorReducer
+  conduktor: conduktorReducer
 })
 
-
 export const store = createStore<State, Actions, unknown, unknown>(
-    rootReducers,
-    composeWithDevTools(applyMiddleware(...middlewares))
+  rootReducers,
+  composeWithDevTools(applyMiddleware(...middlewares))
 )
 
- initStateWithPrevTab(store as unknown as Store<State, AnyAction>);
-
-
+initStateWithPrevTab(store as unknown as Store<State, AnyAction>)
 
 export const conduktorLens = Lens.fromProp<State>()('conduktor')

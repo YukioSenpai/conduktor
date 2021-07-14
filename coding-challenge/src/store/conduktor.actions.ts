@@ -2,7 +2,6 @@
 import { Cluster } from '../business/cluster'
 import { Topic } from '../business/topic'
 import { AsOpaque, summon, tagged } from '../framework/summoner'
-import {AnyAction} from "redux"
 
 const CreateCluster_ = summon(F => F.interface({ cluster: Cluster(F), type: F.stringLiteral('CreateCluster') }, 'CreateCluster'))
 export interface CreateCluster extends AType<typeof CreateCluster_> { }
