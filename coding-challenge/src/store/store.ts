@@ -1,7 +1,6 @@
 import { createBrowserHistory } from 'history'
-import env from '@beam-australia/react-env'
 import { applyMiddleware, combineReducers, createStore } from 'redux'
- import { createStateSyncMiddleware, initStateWithPrevTab, withReduxStateSync } from 'redux-state-sync';
+ import { createStateSyncMiddleware, initStateWithPrevTab } from 'redux-state-sync';
 import { composeWithDevTools } from 'redux-devtools-extension'
 import logger from 'redux-logger'
 import { createEpicMiddleware } from 'redux-observable'
@@ -23,7 +22,7 @@ export const epicMiddleware = createEpicMiddleware<Actions, Actions, State>()
 const tabSyncMiddleware = createStateSyncMiddleware({
 })
 
-const middlewares = env('ENV') === 'production' ? [epicMiddleware, tabSyncMiddleware] : [epicMiddleware, tabSyncMiddleware, logger]
+const middlewares = process.env.ENV === 'production' ? [epicMiddleware, tabSyncMiddleware] : [epicMiddleware, tabSyncMiddleware, logger]
 
 export const history = createBrowserHistory()
 
