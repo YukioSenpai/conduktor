@@ -1,6 +1,8 @@
-import React, { useContext, useState } from "react"
-import { Locale } from "../models/locale"
-import { constVoid } from 'fp-ts/lib/function'
+import * as E from 'fp-ts/lib/Either'
+import { constVoid, pipe } from 'fp-ts/lib/function'
+import React, { useContext } from 'react'
+import useSwr from 'swr'
+import { Locale, LocaleCodec } from '../models/locale'
 
 export interface ContextLocale {
   value: Locale
@@ -9,19 +11,32 @@ export interface ContextLocale {
 
 export const defaultLocale = Locale.wrap('en')
 
-export const LocaleContext = React.createContext<ContextLocale>({value : defaultLocale, setValue: constVoid})
-
-export const LocaleFakeContext = React.createContext(defaultLocale)
+export const LocaleContext = React.createContext<ContextLocale>({
+  value: defaultLocale,
+  setValue: constVoid
+})
 
 export const LocaleProvider: React.FC = ({ children }) => {
-    const [value, setValue] = useState(defaultLocale)
-
-    return (
-      <LocaleContext.Provider value={{ value, setValue }}>
-        {children}
-      </LocaleContext.Provider>
+  const getSavedLocale = () =>
+    pipe(
+      LocaleCodec.decode(localStorage.getItem('locale')),
+      E.map(Locale.wrap),
+      E.getOrElse(() => defaultLocale)
     )
+
+  const { data, mutate } = useSwr('locale', getSavedLocale)
+
+  const saveLocale = (l: Locale) => {
+    localStorage.setItem('locale', LocaleCodec.encode(Locale.unwrap(l)))
+    mutate(l)
   }
-  
+
+  return (
+    <LocaleContext.Provider value={{ value: data || defaultLocale, setValue: saveLocale }}>
+      {children}
+    </LocaleContext.Provider>
+  )
+}
+
 export const useLocale = () => useContext(LocaleContext).value
 export const useSetLocale = () => useContext(LocaleContext).setValue

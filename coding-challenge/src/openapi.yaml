@@ -2,10 +2,20 @@ openapi: 3.0.3
 info:
   title: conduktor-coding-challenge
   version: 1.0.0
+schemes:
+  - http
+  - https
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
 paths:
   /clusters:
     get:
       operationId: listClusters
+      security:
+        - Bearer: []
       responses:
         '200':
           description: List the clusters available
@@ -19,6 +29,8 @@ paths:
           description: ''
     post:
       operationId: createCluster
+      security:
+        - Bearer: []
       requestBody:
         description: Friendly name of the cluster to create
         content:
@@ -34,6 +46,8 @@ paths:
   /clusters/{id}:
     delete:
       operationId: deleteCluster
+      security:
+        - Bearer: []
       parameters:
         - name: id
           in: path
@@ -49,6 +63,8 @@ paths:
   /clusters/{id}/topics:
     get:
       operationId: listTopics
+      security:
+        - Bearer: []
       parameters:
         - name: id
           in: path
@@ -68,6 +84,8 @@ paths:
           description: ''
     post:
       operationId: createTopic
+      security:
+        - Bearer: []
       parameters:
         - name: id
           in: path
@@ -90,6 +108,8 @@ paths:
   /clusters/{id}/topics/{topic}/data:
     get:
       operationId: getData
+      security:
+        - Bearer: []
       parameters:
         - name: id
           in: path

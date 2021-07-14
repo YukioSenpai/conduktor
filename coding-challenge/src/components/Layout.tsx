@@ -1,4 +1,4 @@
-import { Layout as L } from 'antd'
+import { Layout as L, Space } from 'antd'
 import React from 'react'
 import { stylesheet } from 'typestyle'
 import { useSetLocale } from '../framework/locale-context'
@@ -14,7 +14,16 @@ const css = stylesheet({
     header: {
         backgroundColor: '#fff',
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    flags: {
+        fontSize: '2rem',
+        cursor: 'pointer'
+    },
+    logo: {
+        width: 'auto',
+        height: '1.5rem'
     }
   })
 
@@ -24,10 +33,13 @@ export const Layout: React.FC = ({children}) => {
         <>
             <Header className={css.header}>
                 <div />
-                <img src='https://www.conduktor.io/uploads/conduktor.svg' alt='' />
+                <img src='https://www.conduktor.io/uploads/conduktor.svg' alt='' className={css.logo}/>
                 <div>
-                <span onClick={() => setLocale(Locale.wrap('fr'))}>🇫🇷</span>
-                <span onClick={() => setLocale(Locale.wrap('en'))}>🇬🇧</span>
+                <Space>
+                    <span onClick={() => setLocale(Locale.wrap('fr'))} className={css.flags}>🇫🇷</span>
+                    <span>/</span>
+                    <span onClick={() => setLocale(Locale.wrap('en'))} className={css.flags}>🇬🇧</span>
+                </Space>
                 </div>
             </Header>
             <L className={css.layout}>
